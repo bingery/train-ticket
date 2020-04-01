@@ -1,0 +1,20 @@
+.header{
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    position: relative;
+    background: #1ba9ba;
+    color: #fff;
+    font-size: 18px;
+}
+
+.header-back{
+    position: absolute;
+    left: 0;
+    width: 42px;
+    height: 42px;
+}
+.header-title{
+    display: inline-block;
+    font-size: 100%;
+}
