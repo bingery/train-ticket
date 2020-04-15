@@ -28,6 +28,8 @@ export function exchangeFromTo(){
 }
 
 export function setCityData(cityData){
+    window.console.log(cityData)
+
     return {
         type: ACTION_SET_CITY_DATA,
         payload: cityData
@@ -69,7 +71,9 @@ export function setSelectedCity(city){
     }
 }
 export function fetchCityData() {
+
     return (dispatch, getstate)=>{
+
 
         const { isCityDataLoading } = getstate()
         

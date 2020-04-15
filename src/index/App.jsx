@@ -8,7 +8,11 @@ import Journey from './Journey.jsx'
 import CitySelector from '../components/CitySelector'
 
 import {
-    exchangeFromTo
+    exchangeFromTo,
+    fetchCityData,
+    showCitySelector,
+    hideCitySelector,
+    setSelectedCity
 } from './actions'
 
 function App(props){
@@ -18,17 +22,30 @@ function App(props){
         to,
         dispatch,
         isCityDataLoading,
-        cityData
+        cityData,
+        isCitySelectorShow,
     } = props
 
     const onBack = useCallback(() =>{
         window.history.back()
     }, [])
 
-    const cbs = useMemo(() => {
+    const journeyCbs = useMemo(() => {
         return bindActionCreators(
             {
                 exchangeFromTo,
+                showCitySelector,
+            },
+            dispatch
+        )
+    }, [])
+
+    const citySelectorCbs = useMemo(() => {
+        return bindActionCreators(
+            {
+                fetchCityData,
+                hideCitySelector,
+                setSelectedCity
             },
             dispatch
         )
@@ -40,12 +57,14 @@ function App(props){
                 <Header title='火车票' onBack={onBack}/>
             </div>
             <form action="./query.html" className="form">
-                <Journey from={from} to={to} {...cbs}/>
+                <Journey from={from} to={to} {...journeyCbs}/>
             </form>
 
             <CitySelector
                 isLoading={isCityDataLoading}
                 cityData={cityData}
+                {...citySelectorCbs}
+                show={isCitySelectorShow}
             />
             
         </div>
